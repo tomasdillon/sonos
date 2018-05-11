@@ -1,6 +1,6 @@
 <?php
-require_once('funciones.php');
- require_once("includes/html-doc.php");
+require_once 'funciones.php';
+require_once 'includes/html-doc.php';
 
 if (!estaLogueado()){
   header('location: index.php');

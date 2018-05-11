@@ -1,7 +1,2 @@
 
-{"id":1,"name":"prueba","apellido":"prueba","email":"prueba@gmail.com","pass":"$2y$10$IWM0TIxk34XXf.4fP7zK2OJYcwmwCIItM6qfxgS\/bRGOKoqXLy8L.","avatar":"avatarUsuarios\/prueba@gmail.com.png"}
-{"id":2,"name":"tomas","apellido":"dillon","email":"tomasdillon2@gmail.com","pass":"$2y$10$EcYPGbAJ6H21WCPKWN\/D\/u4kprDAVHpXX8ve6Tx2p41G5rl3Cf.vu","avatar":"avatarUsuarios\/tomasdillon2@gmail.com.png"}
-{"id":3,"name":"prueba1","apellido":"prueba1","email":"prueba1@gmail.com","pass":"$2y$10$6KCs.VNYh9VDDT6Dvz0Y1eBsDKhkLnhm1WRciGPgeRmEDIRmrDpAK","avatar":"avatarUsuarios\/prueba1@gmail.com.png"}
-{"id":4,"name":"prueba2","apellido":"prueba2","email":"prueba2@gmail.com","pass":"$2y$10$L48KA0wrTEcO7KyJQkIU6OPOxgWCEScgNUhxC8WJcZ689UwSAxnty","avatar":"avatarUsuarios\/prueba2@gmail.com.png"}
-{"id":5,"name":"prueba3","apellido":"prueba3","email":"prueba3@gmail.com","pass":"$2y$10$CYkUkFmywm1XbJQ8oXyrm.RsHeROBpDQWmpaes.sPKAKIIsNLC2Qe","avatar":"avatarUsuarios\/prueba3@gmail.com.png"}
-{"id":6,"name":"prueba4","apellido":"prueba4","email":"prueba4@gmail.com","pass":"$2y$10$r1SBiEQWnaM.nKddK\/cn9eM78dwZlXjO36Psj9z\/cpolEC9g7bA5C","avatar":"avatarUsuarios\/prueba4@gmail.com.png"}
+{"id":1,"name":"Tomas","apellido":"Dillon","email":"tomasdillon2@gmail.com","pass":"$2y$10$qKlSRlEqZlhAxJ2Zo9vyv.jUEv68QfQOMpPluk3bDYHKzDlexWbFu","avatar":"avatarUsuarios\/tomasdillon2@gmail.com.png"}
