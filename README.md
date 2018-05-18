@@ -1,4 +1,4 @@
-# Sonos (red social)
+# Sonos
 <br><br>
 Integrantes:<br>
 - Dieguez, Leonardo<br>
