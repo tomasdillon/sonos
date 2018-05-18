@@ -1,36 +1,36 @@
 <?php
-require_once('funciones.php');
-require_once("includes/html-doc.php");
+  require_once 'soporte.php';
+  require_once 'includes/html-doc.php';
 
-if (estaLogueado()){
-  header('location: bienvenido.php');
-  exit;
-}
-
-
-$email = '';
-
-$validacion = [];
-
-if ($_POST){
-  $email = trim($_POST['email']);
-
-  $validacion = validacionLogeo($_POST);
-
-  if (empty($validacion)){
-    $usuario = existeEmail($email);
-
-    loguear($usuario);
-
-    if(isset($_POST['recordar'])){
-      setcookie('id', $usuario['id'], time() + 3600);
-
-    }
+  if ($auth->estaLogueado()){
     header('location: bienvenido.php');
     exit;
   }
 
-}
+
+  $email = '';
+
+  $validacion = [];
+
+  if ($_POST){
+    $email = trim($_POST['email']);
+
+    $validacion = $validator->validacionLogeo($db);
+
+    if (empty($validacion)){
+      $usuario = $db->existeEmail($email);
+
+      $auth->loguear($usuario->getId());
+
+      if(isset($_POST['recordar'])){
+        setcookie('id', $usuario->getId(), time() + 3600);
+
+      }
+      header('location: bienvenido.php');
+      exit;
+    }
+
+  }
 
  ?>
 
@@ -115,7 +115,7 @@ if ($_POST){
 
     </div>
     <div class="form-check ajusteleft">
-      <label class="form-check-label" style="font-size: 0.7em; color:black;"><input class="form-check-input" type="checkbox" name="recordar"> Recordarme</label>
+      <label class="form-check-label" style="font-size: 0.7em; color:black;"><input class="form-check-input" type="checkbox" name="recordar">Recordarme</label>
       <a href="#" class="ml-1 ml-sm-5">¿Olvidaste tu contraseña?</a>
     </div>
   </form>

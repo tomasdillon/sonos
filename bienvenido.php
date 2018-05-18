@@ -1,19 +1,23 @@
 <?php
-require_once 'funciones.php';
-require_once 'includes/html-doc.php';
+  require_once 'soporte.php';
+  require_once 'includes/html-doc.php';
 
-if (!estaLogueado()){
-  header('location: index.php');
-  exit;
-}
+  if (!$auth->estaLogueado()){
+    header('location: index.php');
+    exit;
+  }
 
-$usuario = traerPorID($_SESSION['id']);
-?>
+  $usuario = $db->traerPorID($_SESSION['id']);
+
+  // echo "<pre>";
+  // var_dump($usuario);exit;
+
+  ?>
 
 <body>
   <div class="container">
-    <h1>Hola <?=$usuario['name']?></h1>
-    <img class="img-rounded" src="<?=$usuario['avatar']?>" width="200">
+    <h1>Bienvenido <?=$usuario->getName()?>!</h1>
+    <img class="img-rounded" src="<?=$usuario->getPicture()?>" width="200">
     <br><br>
     <a class="btn btn-info" href="logout.php">CERRAR SESIÓN</a>
   </div>

@@ -9,7 +9,7 @@ function nuevoUsuario($data, $imagen){
   $usuario = [
     'id' => crearID(),
     'name' => $data['name'],
-    'apellido' => $data['apellido'],
+    'last_name' => $data['last_name'],
     'email' => $data['email'],
     'pass' => password_hash($data['pass'], PASSWORD_DEFAULT),
     'avatar' => 'avatarUsuarios/' . $data['email'] . '.' . pathinfo($_FILES[$imagen]['name'], PATHINFO_EXTENSION)
@@ -21,15 +21,15 @@ function validacionDatos($dato, $archivo){
    $errores=[];
 
    $name = trim($_POST['name']);
-   $apellido = trim($_POST['apellido']);
+   $last_name = trim($_POST['last_name']);
    $email = trim($_POST['email']);
    $pass = trim($_POST['pass']);
 
    if ($name == '') {
      $errores['name'] = 'Completá tu nombre';
    }
-   if ($apellido =='') {
-     $errores['apellido'] = 'Completá tu apellido';
+   if ($last_name =='') {
+     $errores['last_name'] = 'Completá tu apellido';
    }
    if ($email == '') {
      $errores['email'] = 'Completá tu email';

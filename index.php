@@ -1,70 +1,83 @@
- <?php
- require_once("funciones.php");
- require_once("includes/html-doc.php");
- require_once("includes/nav-bar.php");
+<?php
+  error_reporting(E_ALL);
+  ini_set('display_errors', '1');
 
- if (estaLogueado()){
-   header('location: bienvenido.php');
-   exit;
- }
+  require_once 'soporte.php';
+  require_once 'includes/html-doc.php';
+  require_once 'includes/nav-bar.php';
 
- $name = '';
- $email = '';
- $pais = '';
+  $name = '';
+  $last_name = '';
+  $email = '';
 
- $errores = [];
 
- if ($_POST) {
-   $name = trim($_POST['name']);
-   $apellido = trim($_POST['apellido']);
-   $email = trim($_POST['email']);
+  $errores = [];
 
-   $errores = validacionDatos($_POST, 'avatar');
+  if ($_POST) {
+    $name = trim($_POST['name']);
+    $last_name = trim($_POST['last_name']);
+    $email = trim($_POST['email']);
 
-   if (empty($errores)){
-     $errores = guardarImagen('avatar');
-     if (empty($errores)){
-       $usuario = guardarUsuario($_POST,'avatar');
-       // loguear($usuario);
-     }
-   }
- }
+    $errores = $validator->validateRegister($db, 'picture');
+
+    if (empty($errores)){
+
+      $errores = $db->guardarImagen('picture', $email);
+
+      if (empty($errores)){
+        $ext = pathinfo($_FILES['picture']['name'], PATHINFO_EXTENSION);
+
+        $picture = 'img/' . $email . '.' . $ext;
+
+        $usuario = new User($_POST['name'], $_POST['last_name'], $_POST['email'], $_POST['pass'], $picture);
+
+        $usuario = $db->guardarUsuario($usuario, $db);
+
+        // loguear($usuario);
+      }
+    }
+  }
 
  ?>
 
-<body>
-<!-- Registro & portada -->
-<section class="portada-inicial justify-content-center">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-12 mt-3">
-        <img src="image/logo.png" alt="logo" class="mt-5" style="width: 100%; max-width: 405px;">
-        <em class="titulos d-none d-sm-block text-dark mb-5">La música nos une</em>
-        <div class="row justify-content-center">
-          <!--<div class="col-8 col-md-6 col-lg-6"> -->
-            <form class="mt-5" method="post" enctype="multipart/form-data">
-              <div class="row">
-                <div class="col-6">
-                  <input class="form-control" type="text" placeholder="Nombre" name="name" value="<?= isset($_POST['name']) ? $_POST['name'] : '' ?>">
-                  <?php if (isset($errores['name'])): ?>
-                    <span class="errores"><?=$errores['name'];?></span>
-                  <?php endif; ?>
-                </div>
-                <div class="col-6">
-                  <input class="form-control" type="text" placeholder="Apellido" name="apellido" value="<?= isset($_POST['apellido']) ? $_POST['apellido'] : '' ?>">
-                  <?php if (isset($errores['apellido'])): ?>
-                    <span class="errores"><?=$errores['apellido'];?></span>
-                  <?php endif; ?>
-                </div>
-                <br><br>
-              </div>
+ <body>
 
-              <div class="form-group">
-                <input class="form-control" type="email" placeholder="Ingresá tu e-mail" name="email" value="<?= isset($_POST['email']) ? $_POST['email'] : '' ?>">
-                <?php if (isset($errores['email'])): ?>
-                  <span class="errores"><?=$errores['email'];?></span>
-                <?php endif; ?>
-              </div>
+   <!-- Registro & portada -->
+   <section class="portada-inicial justify-content-center">
+
+     <div class="container">
+       <div class="row align-items-center">
+         <div class="col-12 mt-3">
+           <img src="image/logo.png" alt="logo" class="mt-5" style="width: 100%; max-width: 405px;">
+           <em class="titulos d-none d-sm-block text-dark mb-5">La música nos une</em>
+
+           <div class="row justify-content-center">
+
+             <form class="mt-5" method="post" enctype="multipart/form-data">
+
+               <div class="row">
+                 <div class="col-6">
+                   <input class="form-control" type="text" placeholder="Nombre" name="name" value="<?= isset($_POST['name']) ? $_POST['name'] : '' ?>">
+                   <?php if (isset($errores['name'])): ?>
+                     <span class="errores"><?=$errores['name'];?></span>
+                   <?php endif; ?>
+                 </div>
+
+                 <div class="col-6">
+                   <input class="form-control" type="text" placeholder="Apellido" name="last_name" value="<?= isset($_POST['last_name']) ? $_POST['last_name'] : '' ?>">
+                   <?php if (isset($errores['last_name'])): ?>
+                     <span class="errores"><?=$errores['last_name'];?></span>
+                   <?php endif; ?>
+                 </div>
+                 <br><br>
+               </div>
+
+               <div class="form-group">
+                 <input class="form-control" type="email" placeholder="Ingresá tu e-mail" name="email" value="<?= isset($_POST['email']) ? $_POST['email'] : '' ?>">
+                 <?php if (isset($errores['email'])): ?>
+                   <span class="errores"><?=$errores['email'];?></span>
+                 <?php endif; ?>
+               </div>
 
               <div class="form-group">
                 <input class="form-control" type="password" placeholder="Creá tu contraseña" name="pass">
@@ -75,30 +88,23 @@
 
               <div class="form-group">
                 <label class="subiTuFoto">Subí tu foto</label>
-                <input class="form-control" type="file" name="avatar" value="<?=isset($_FILES['avatar']) ? $_FILES['avatar']['name'] : null ?>">
-                <?php if (isset($errores['avatar'])): ?>
-                  <span class="errores"> <?=$errores['avatar'];?>
-                  </span>
+                <input class="form-control" type="file" name="picture" value="<?=isset($_FILES['picture']) ? $_FILES['picture']['name'] : null ?>">
+                <?php if (isset($errores['picture'])): ?>
+                  <span class="errores"> <?=$errores['picture'];?></span>
                 <?php endif; ?>
               </div>
 
-
               <div class="form-group">
-                <!-- <div class="col-6"> -->
-                  <button class="btn btn-success my-5" type="submit" name="button">Registrarme</button>
-                </div>
-                <!-- <div class="col-6">
-                  <button class="btn btn-info my-5" type="" name="button">Iniciar Sesion</button>
-                </div> -->
-
+                <button class="btn btn-success my-5" type="submit" name="button">Registrarme</button>
               </div>
 
             </form>
+
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
 <!--  Quienes Somos -->
 <section class="container-fluid border fondoNeutro justify-content-center align-items-center" id="QuienesSomos">
