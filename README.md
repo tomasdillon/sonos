@@ -1,5 +1,5 @@
-# trabajo_integrador
-Red Social "Sonos"<br><br>
+# Sonos
+<br>
 Integrantes:<br>
 - Dieguez, Leonardo<br>
 - Dillon, Tomas<br>
