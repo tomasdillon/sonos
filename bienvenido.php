@@ -8,7 +8,7 @@
   }
 
   $usuario = $db->traerPorID($_SESSION['id']);
-
+  
   ?>
 
 <body>
