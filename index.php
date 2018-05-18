@@ -1,6 +1,4 @@
 <?php
-  error_reporting(E_ALL);
-  ini_set('display_errors', '1');
 
   require_once 'soporte.php';
   require_once 'includes/html-doc.php';
@@ -12,8 +10,8 @@
 
 
   $errores = [];
+  if (isset($_POST['button'])) {
 
-  if ($_POST) {
     $name = trim($_POST['name']);
     $last_name = trim($_POST['last_name']);
     $email = trim($_POST['email']);
@@ -27,7 +25,7 @@
       if (empty($errores)){
         $ext = pathinfo($_FILES['picture']['name'], PATHINFO_EXTENSION);
 
-        $picture = 'img/' . $email . '.' . $ext;
+        $picture = 'avatarUsuarios/' . $email . '.' . $ext;
 
         $usuario = new User($_POST['name'], $_POST['last_name'], $_POST['email'], $_POST['pass'], $picture);
 

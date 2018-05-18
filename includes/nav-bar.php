@@ -12,10 +12,13 @@
 
   $validacion = [];
 
-  if ($_POST){
+  if (isset($_POST['login'])){
+
     $email = trim($_POST['email']);
 
     $validacion = $validator->validacionLogeo($db);
+
+    // var_dump($validacion);exit;
 
     if (empty($validacion)){
       $usuario = $db->existeEmail($email);
@@ -93,6 +96,7 @@
 
 
 <div class="col-10 col-lg-5 p-1">
+
   <form class="col-lg-12" method="post">
     <div class="form-inline ">
       <div class="col-10 col-sm-9 col-md-8 col-lg-8 p-0 ml-lg-auto">
@@ -110,7 +114,7 @@
         </div>
       </div>
 
-      <button type="submit" class="btn btn-success btn-sm ml-1 pl-2 pr-2 hidden-xs"style="font-size: 0.6em;font-weight:bold;"> <span class="ion-log-in"></span> Ingresar </button>
+      <button type="submit" class="btn btn-success btn-sm ml-1 pl-2 pr-2 hidden-xs" style="font-size: 0.6em;font-weight:bold;" name="login"> <span class="ion-log-in"></span> Ingresar </button>
       <!-- <button type="submit" class="btn btn-success btn-sm button-small ml-2 p-0 px-2"style="font-size: 0.7em;font-weight:bold;"> <span class="ion-log-in"></span></button> -->
 
     </div>
