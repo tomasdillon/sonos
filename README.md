@@ -1,5 +1,5 @@
 # Sonos
-<br><br>
+<br>
 Integrantes:<br>
 - Dieguez, Leonardo<br>
 - Dillon, Tomas<br>
