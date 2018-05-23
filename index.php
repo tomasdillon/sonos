@@ -10,7 +10,7 @@
 
 
   $errores = [];
-  if (isset($_POST['button'])) {
+  if (isset($_POST['register'])) {
 
     $name = trim($_POST['name']);
     $last_name = trim($_POST['last_name']);
@@ -36,76 +36,84 @@
     }
   }
 
- ?>
+?>
 
- <body>
+<body>
 
    <!-- Registro & portada -->
-   <section class="portada-inicial justify-content-center">
+  <section class="portada-inicial justify-content-center">
 
-     <div class="container">
+    <div class="container">
        <div class="row align-items-center">
          <div class="col-12 mt-3">
            <img src="image/logo.png" alt="logo" class="mt-5" style="width: 100%; max-width: 405px;">
            <em class="titulos d-none d-sm-block text-dark mb-5">La música nos une</em>
 
            <div class="row justify-content-center">
+             <div class="col-8 col-md-6 col-lg-6">
 
              <form class="mt-5" method="post" enctype="multipart/form-data">
 
-               <div class="row">
-                 <div class="col-6">
-                   <input class="form-control" type="text" placeholder="Nombre" name="name" value="<?= isset($_POST['name']) ? $_POST['name'] : '' ?>">
+               <div class="form-inline">
+
+                 <input class="form-control col-6 col-sm-5" type="text" placeholder="Nombre" name="name" value="<?= isset($_POST['name']) ? $_POST['name'] : '' ?>">
+                 <input class="form-control col-6 col-sm-5 ml-sm-auto" type="text" placeholder="Apellido" name="last_name" value="<?= isset($_POST['last_name']) ? $_POST['last_name'] : '' ?>">
+               </div>
+
+<div class="form-inline d-inline">
+               <label>
+                 <div class="mr-5 ">
                    <?php if (isset($errores['name'])): ?>
                      <span class="errores"><?=$errores['name'];?></span>
                    <?php endif; ?>
-                 </div>
+                  </div>
 
-                 <div class="col-6">
-                   <input class="form-control" type="text" placeholder="Apellido" name="last_name" value="<?= isset($_POST['last_name']) ? $_POST['last_name'] : '' ?>">
-                   <?php if (isset($errores['last_name'])): ?>
-                     <span class="errores"><?=$errores['last_name'];?></span>
-                   <?php endif; ?>
+                 <div class="ml-5 " >
+                 <?php if (isset($errores['last_name'])): ?>
+                   <span class="errores"><?=$errores['last_name'];?></span>
+                 <?php endif; ?>
                  </div>
-                 <br><br>
-               </div>
+               </label>
+   </div>
+   <label></label>
 
-               <div class="form-group">
                  <input class="form-control" type="email" placeholder="Ingresá tu e-mail" name="email" value="<?= isset($_POST['email']) ? $_POST['email'] : '' ?>">
+                <label style="color:black;">
                  <?php if (isset($errores['email'])): ?>
                    <span class="errores"><?=$errores['email'];?></span>
                  <?php endif; ?>
-               </div>
+                </label>
 
-              <div class="form-group">
                 <input class="form-control" type="password" placeholder="Creá tu contraseña" name="pass">
+                <label style="color:black;">
                 <?php if (isset($errores['pass'])): ?>
                   <span class="errores"><?=$errores['pass'];?></span>
                 <?php endif; ?>
-              </div>
+                </label>
 
               <div class="form-group">
-                <label class="subiTuFoto">Subí tu foto</label>
                 <input class="form-control" type="file" name="picture" value="<?=isset($_FILES['picture']) ? $_FILES['picture']['name'] : null ?>">
+                <label style="color:black;">
                 <?php if (isset($errores['picture'])): ?>
                   <span class="errores"> <?=$errores['picture'];?></span>
                 <?php endif; ?>
+                </label>
               </div>
 
               <div class="form-group">
-                <button class="btn btn-success my-5" type="submit" name="button">Registrarme</button>
+                <button class="btn btn-success my-5" type="submit" name="register">Registrarme</button>
               </div>
 
             </form>
-
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-<!--  Quienes Somos -->
-<section class="container-fluid border fondoNeutro justify-content-center align-items-center" id="QuienesSomos">
+  <!--  Quienes Somos -->
+  <section class="container-fluid border fondoNeutro justify-content-center align-items-center" id="QuienesSomos">
   <h1 class="my-5 text-center display-3">Quienes somos</h1>
     <div class="col text-center border py-3 mb-5">
       <p>En <em>Sonos!</em> buscamos reunir personas con la misma pasión por la música. <br>
@@ -122,6 +130,29 @@
       </p>
       <a href="faq.php" class="btn btn-success mt-3">¿Aún tenés dudas?</a>
     </div>
-</section>
+  </section>
+
+  <!-- boton top -->
+  <button onclick="topFunction()" id="top-button" title="Go to top"> <span class="arrow-dropup-circle"></span> Top </button>
+
+
+  <script>
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {scrollFunction()};
+
+  function scrollFunction() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+          document.getElementById("top-button").style.display = "block";
+      } else {
+          document.getElementById("top-button").style.display = "none";
+      }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+  }
+  </script>
 
 <?php require_once("includes/footer.php") ?>

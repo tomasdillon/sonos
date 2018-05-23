@@ -102,20 +102,28 @@
       <div class="col-10 col-sm-9 col-md-8 col-lg-8 p-0 ml-lg-auto">
         <div class="input-group mr-2 ">
 
-          <input type="email" name="email" class="form-control mr-2 col-7" id="inlineFormInputName2" placeholder="Email" value="<?=isset($_POST['email']) ? $_POST['email'] : '' ?>">
+
           <?php if (isset($validacion['email'])): ?>
-            <span class="errores2"><?=$validacion['email'];?></span>
+          <input type="text" name="email" class="form-control mr-2 col-7" id="inlineFormInputName2" placeholder="Email" value="<?=isset($_POST['email']) ? $_POST['email'] : '' ?>" data-toggle="tooltip" title="<?=$validacion['email'];?>">
+            <!-- <span class="errores2">?></span> -->
+          <?php else:     ?>
+           <input type="text" name="email" class="form-control mr-2 col-7" id="inlineFormInputName2" placeholder="Email" value="<?=isset($_POST['email']) ? $_POST['email'] : '' ?>">
           <?php endif; ?>
 
-          <input type="password" class="form-control col-5" id="inlineFormInputGroupUsername2" placeholder="Contraseña" name = 'pass'>
+
           <?php if (isset($validacion['pass'])): ?>
-            <span class="errores2"><?=$validacion['pass'];?></span>
+          <input type="password" name="pass" class="form-control col-5" id="inlineFormInputName2" placeholder="Email" value="<?=isset($_POST['pass']) ? $_POST['pass'] : '' ?>" data-toggle="tooltip" title="<?=$validacion['pass'];?>">
+            <!-- <span class="errores2">?></span> -->
+          <?php else:     ?>
+           <input type="password" name="pass" class="form-control col-5" id="inlineFormInputName2" placeholder="Email" value="<?=isset($_POST['pass']) ? $_POST['pass'] : '' ?>">
           <?php endif; ?>
+
+
         </div>
       </div>
 
       <button type="submit" class="btn btn-success btn-sm ml-1 pl-2 pr-2 hidden-xs" style="font-size: 0.6em;font-weight:bold;" name="login"> <span class="ion-log-in"></span> Ingresar </button>
-      <!-- <button type="submit" class="btn btn-success btn-sm button-small ml-2 p-0 px-2"style="font-size: 0.7em;font-weight:bold;"> <span class="ion-log-in"></span></button> -->
+      <button type="submit" class="btn btn-success btn-sm button-small ml-2 p-0 px-2"style="font-size: 0.7em;font-weight:bold;"> <span class="ion-log-in"></span></button>
 
     </div>
     <div class="form-check ajusteleft">
@@ -139,4 +147,8 @@ function openNav() {
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
+
+
+
+$('[data-toggle="tooltip"]').tooltip('show');
 </script>

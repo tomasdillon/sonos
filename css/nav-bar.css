@@ -1,0 +1,95 @@
+
+.navbar-nav{
+  display: -webkit-box;
+  }
+
+.navbar a{
+    color: black;
+    text-align: center;
+}
+
+.decoracion-borde{
+      border-right: solid 1px #949494;
+}
+
+/* nav mobie */
+
+.nav-mobie{
+        display: none;
+}
+.button-small{
+  display: none;
+}
+
+
+
+@media screen and (max-width: 991px){
+      .ajusteleft {
+        margin-left: 0;
+      }
+
+      .nav-mobie{
+        display: block;
+        margin-left: 1em;
+        margin-right: 6.5em;
+        }
+
+      .header-sup{
+        display: flex;
+        justify-content: space-between;
+        height: 62px;
+      }
+
+      .sidenav {
+          height: 100%;
+          width: 0;
+          position: fixed;
+          z-index: 1;
+          top: 0;
+          left: 0;
+          background-color: #f1f1f1;
+          overflow-x: hidden;
+          transition: 0.5s;
+          padding-top: 60px;
+          border: solid 2px #3e6a00;
+          border-left: none;
+            }
+
+      .sidenav a {
+          padding: 8px 8px 8px 32px;
+          text-decoration: none;
+          font-size: 25px;
+          color: #000000;
+          display: block;
+          transition: 0.3s;
+          text-align: center;
+      }
+
+      .sidenav a:hover {
+          font-weight:200;
+          text-decoration:underline;
+      }
+
+      .sidenav .closebtn {
+          position: absolute;
+          top: 0;
+          right: 25px;
+          font-size: 36px;
+          margin-left: 50px;
+      }
+
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+
+  }
+
+  @media screen and (max-width: 576px){
+    .button-small{
+       display: block; }
+  }
+
+
+/* fin nav mobie  */
