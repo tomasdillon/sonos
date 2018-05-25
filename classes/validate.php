@@ -30,14 +30,14 @@
        } elseif (strlen($pass)<7) {
          $errores['pass'] = 'La clave no puede ser menor de 7 caracteres';
        }
-       if ($_FILES[$archivo]['error'] != UPLOAD_ERR_OK) {
-         $errores['picture'] = "Subí una foto por favor";
-       } else {
-         $ext=strtolower(pathinfo($_FILES[$archivo]['name'], PATHINFO_EXTENSION));
-         if ($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg') {
-           $errores['picture'] = "Formatos admitidos: JPG, PNG o JPEG";
-         }
-       }
+       // if ($_FILES[$archivo]['error'] != UPLOAD_ERR_OK) {
+       //   $errores['picture'] = "Subí una foto por favor";
+       // } else {
+       //   $ext=strtolower(pathinfo($_FILES[$archivo]['name'], PATHINFO_EXTENSION));
+       //   if ($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg') {
+       //     $errores['picture'] = "Formatos admitidos: JPG, PNG o JPEG";
+       //   }
+       // }
        return $errores;
     }
 

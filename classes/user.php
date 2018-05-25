@@ -23,7 +23,7 @@
         'last_name' => $this->last_name,
         'email' => $this->email,
         'pass' => $this->setPassword($this->pass),
-        'picture' => $this->picture
+        'picture' => 'image/avatar_default.png'
       ];
       // return $usuario;
     }

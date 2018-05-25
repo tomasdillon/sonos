@@ -95,27 +95,27 @@
       return $user;
     }
 
-    public function guardarImagen($imagen, $email){
-      $errores=[];
-
-      if ($_FILES[$imagen]['error'] == UPLOAD_ERR_OK){
-
-        $nombreArchivo = $_FILES[$imagen]['name'];
-        $ext = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
-        $archivoTemp = $_FILES[$imagen]['tmp_name'];
-
-        if ($ext == 'jpg' || $ext == 'png' || $ext = 'jpeg'){
-          $rutaArchivoActual = dirname(__FILE__);
-          $rutaArchivoFinal = $rutaArchivoActual . '/../avatarUsuarios/' . $email . '.' . $ext;
-          move_uploaded_file($archivoTemp, $rutaArchivoFinal);
-        } else {
-          $errores['picture'] = "Formato de imagen no valido";
-        }
-
-      } else {
-        $errores['picture'] = "No subíste tu foto";
-      }
-      return $errores;
-    }
+    // public function guardarImagen($imagen, $email){
+    //   $errores=[];
+    //
+    //   if ($_FILES[$imagen]['error'] == UPLOAD_ERR_OK){
+    //
+    //     $nombreArchivo = $_FILES[$imagen]['name'];
+    //     $ext = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
+    //     $archivoTemp = $_FILES[$imagen]['tmp_name'];
+    //
+    //     if ($ext == 'jpg' || $ext == 'png' || $ext = 'jpeg'){
+    //       $rutaArchivoActual = dirname(__FILE__);
+    //       $rutaArchivoFinal = $rutaArchivoActual . '/../avatarUsuarios/' . $email . '.' . $ext;
+    //       move_uploaded_file($archivoTemp, $rutaArchivoFinal);
+    //     } else {
+    //       $errores['picture'] = "Formato de imagen no valido";
+    //     }
+    //
+    //   } else {
+    //     $errores['picture'] = "No subíste tu foto";
+    //   }
+    //   return $errores;
+    // }
 
   }
