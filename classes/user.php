@@ -2,30 +2,41 @@
 
   class User{
     private $id;
-    private $name;
+    private $first_name;
     private $last_name;
     private $email;
     private $pass;
     private $picture;
+    private $reg_date;
 
-    public function __construct($name, $last_name, $email, $pass, $picture){
-      $this->name = $name;
+    public function __construct($first_name, $last_name, $email, $pass){
+      $this->first_name = $first_name;
       $this->last_name = $last_name;
       $this->email = $email;
       $this->pass = $pass;
-      $this->picture = $picture;
+      $this->picture = 'image/avatar_default.png';
     }
 
     public function nuevoUsuario(DB $db){
-      return [
-        'id' => $db->traerUltimoID(),
-        'name' => $this->name,
-        'last_name' => $this->last_name,
-        'email' => $this->email,
-        'pass' => $this->setPassword($this->pass),
-        'picture' => 'image/avatar_default.png'
-      ];
-      // return $usuario;
+      global $dbType;
+      if ($dbType == 'json') {
+        return [
+          'id' => $db->traerUltimoID(),
+          'name' => $this->first_name,
+          'last_name' => $this->last_name,
+          'email' => $this->email,
+          'pass' => $this->setPassword($this->pass),
+          'picture' => $this->picture
+        ];
+      } elseif ($dbType == 'mysql') {
+        return [
+          'name' => $this->first_name,
+          'last_name' => $this->last_name,
+          'email' => $this->email,
+          'pass' => $this->setPassword($this->pass),
+          'picture' => $this->picture
+        ];
+      }
     }
 
     public function setId($id){
@@ -36,12 +47,12 @@
       return $this->id;
     }
 
-    public function setName($name){
-      $this->name = $name;
+    public function setFirstName($first_name){
+      $this->first_name = $first_name;
     }
 
-    public function getName(){
-      return $this->name;
+    public function getFirstName(){
+      return $this->first_name;
     }
 
     public function setLastName($last_name){
@@ -62,6 +73,10 @@
 
     public function setPassword($pass){
       return password_hash($pass, PASSWORD_DEFAULT);
+    }
+
+    public function passNoHash($pass){
+      return $this->pass = $pass;
     }
 
     public function getPassword(){

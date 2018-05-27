@@ -54,9 +54,8 @@
        } elseif (!$usuario = $db->existeEmail($email)) {
          $validacion['email'] = 'Email no registrado';
        } else {
-
          // $usuario = existeEmail($email);
-
+         $hash = $usuario->getPassword();
          if (!password_verify($pass, $usuario->getPassword())) {
            $validacion['pass'] = "Credenciales incorrectas";
          }

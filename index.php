@@ -1,8 +1,7 @@
 <?php
-
 require_once 'soporte.php';
-require_once 'includes/html-doc.php';
 require_once 'includes/nav-bar.php';
+require_once 'includes/html-doc.php';
 
 $name = '';
 $last_name = '';
@@ -16,14 +15,20 @@ if (isset($_POST['register'])) {
   $email = trim($_POST['email']);
 
   $errores = $validator->validateRegister($db, 'picture');
-
   if (empty($errores)){
     // $errores = $db->guardarImagen('picture', $email);
     if (empty($errores)){
-      $ext = pathinfo($_FILES['picture']['name'], PATHINFO_EXTENSION);
-      $picture = 'avatarUsuarios/' . $email . '.' . $ext;
-      $usuario = new User($_POST['name'], $_POST['last_name'], $_POST['email'], $_POST['pass'], $picture);
-      $usuario = $db->guardarUsuario($usuario, $db);
+      //No estaba guardando ninguna imagen con este codigo y tiraba error ya que $_FILES es una variable vacia al no estar mandando ninguna imagen, modifique en user.php el atributo PICTURE dentro del constructor.
+      // $ext = pathinfo($_FILES['picture']['name'], PATHINFO_EXTENSION);
+      // $picture = 'avatarUsuarios/' . $email . '.' . $ext;
+      $usuario = new User($_POST['name'], $_POST['last_name'], $_POST['email'], $_POST['pass']);
+      $test01 = $db->guardarUsuario($usuario, $db);
+      $newUser = $db->traerPorEmail($email);
+      echo "<br>";
+      echo "<br>";
+      echo "<br>";
+      echo "<br>";
+      $auth->loguear($newUser->getId());
     }
   }
 }
