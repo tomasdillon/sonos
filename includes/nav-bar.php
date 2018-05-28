@@ -3,10 +3,7 @@ require_once 'soporte.php';
 require_once 'includes/html-doc.php';
 require_once 'checkdatabase.php';
 
-if ($auth->estaLogueado()){
-  header('location:bienvenido.php');
-  exit;
-}
+
 
 
 $email = '';
@@ -78,35 +75,60 @@ if (isset($_POST['login'])){
         </div>
       </div>
 
-      <div class="col-10 col-lg-5 p-1">
-        <form class="col-lg-12" method="post">
-          <div class="form-inline ">
-            <div class="col-10 col-sm-9 col-md-8 col-lg-8 p-0 ml-lg-auto">
-              <div class="input-group mr-2 ">
-                <?php if (isset($validacion['email'])): ?>
-                  <input type="text" name="email" class="form-control mr-2 col-7" id="inlineFormInputName2" placeholder="Email" value="<?=isset($_POST['email']) ? $_POST['email'] : '' ?>" data-toggle="tooltip" title="<?=$validacion['email'];?>">
-                  <!-- <span class="errores2">?></span> -->
-                <?php else:     ?>
-                  <input type="text" name="email" class="form-control mr-2 col-7" id="inlineFormInputName2" placeholder="Email" value="<?=isset($_POST['email']) ? $_POST['email'] : '' ?>">
-                <?php endif; ?>
-                <?php if (isset($validacion['pass'])): ?>
-                  <input type="password" name="pass" class="form-control col-5" id="inlineFormInputName2" placeholder="Contraseña" value="" data-toggle="tooltip" title="<?=$validacion['pass'];?>">
-                  <!-- <span class="errores2">?></span> -->
-                <?php else:?>
-                  <input type="password" name="pass" class="form-control col-5" id="inlineFormInputName2" placeholder="Contraseña" value="">
-                <?php endif; ?>
-              </div>
-            </div>
-            <button type="submit" class="btn btn-success btn-sm ml-1 pl-2 pr-2 hidden-xs" style="font-size: 0.6em;font-weight:bold;" name="login"> <span class="ion-log-in"></span> Ingresar </button>
-            <button type="submit" class="btn btn-success btn-sm button-small ml-2 p-0 px-2"style="font-size: 0.7em;font-weight:bold;"> <span class="ion-log-in"></span></button>
-          </div>
-          <div class="form-check ajusteleft">
-            <label class="form-check-label" style="font-size: 0.7em; color:black;"><input class="form-check-input" type="checkbox" name="recordar">Recordarme</label>
-            <a href="#" class="ml-1 ml-sm-5">¿Olvidaste tu contraseña?</a>
-          </div>
-        </form>
-      </div>
 
+        <?php if ($auth->estaLogueado()):?>
+        <?php $usuario = $db->traerPorID($_SESSION['id']); ?>
+        <div class="btn-group mb-1">
+          <button type="button" class="btn dropdown-nav mr-2" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false"style="width: 100%; height:55px;">
+            <div class="d-inline col-md-6 text-left">
+              <?=$usuario->getFirstName()?>
+            </div>
+            <div class="d-inline col-md-6">
+              <img src="<?=$usuario->getPicture()?>" alt="avatar" class="rounded-circle" width="40" height="40">
+            </div>
+          </button>
+          <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
+            <a class="dropdown-item" href="perfil.php">Perfil</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#!">Calendario</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="logout.php">Cerrar Sesión</a>
+          </div>
+        </div>
+
+
+
+        <?php else:?>
+        <div class="col-10 col-lg-5 p-1">
+          <form class="col-lg-12" method="post">
+            <div class="form-inline ">
+              <div class="col-10 col-sm-9 col-md-8 col-lg-8 p-0 ml-lg-auto">
+                <div class="input-group mr-2 ">
+                  <?php if (isset($validacion['email'])): ?>
+                    <input type="text" name="email" class="form-control mr-2 col-7" id="inlineFormInputName2" placeholder="Email" value="<?=isset($_POST['email']) ? $_POST['email'] : '' ?>" data-toggle="tooltip" title="<?=$validacion['email'];?>">
+                    <!-- <span class="errores2">?></span> -->
+                  <?php else:     ?>
+                    <input type="text" name="email" class="form-control mr-2 col-7" id="inlineFormInputName2" placeholder="Email" value="<?=isset($_POST['email']) ? $_POST['email'] : '' ?>">
+                  <?php endif; ?>
+                  <?php if (isset($validacion['pass'])): ?>
+                    <input type="password" name="pass" class="form-control col-5" id="inlineFormInputName2" placeholder="Contraseña" value="" data-toggle="tooltip" title="<?=$validacion['pass'];?>">
+                    <!-- <span class="errores2">?></span> -->
+                  <?php else:?>
+                    <input type="password" name="pass" class="form-control col-5" id="inlineFormInputName2" placeholder="Contraseña" value="">
+                  <?php endif; ?>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-sm ml-1 pl-2 pr-2 hidden-xs" style="font-size: 0.6em;font-weight:bold;" name="login"> <span class="ion-log-in"></span> Ingresar </button>
+              <button type="submit" class="btn btn-sm button-small ml-2 p-0 px-2"style="font-size: 0.7em;font-weight:bold;"> <span class="ion-log-in"></span></button>
+            </div>
+            <div class="form-check ajusteleft">
+              <label class="form-check-label" style="font-size: 0.7em; color:black;"><input class="form-check-input" type="checkbox" name="recordar">Recordarme</label>
+              <a href="#" class="ml-1 ml-sm-5">¿Olvidaste tu contraseña?</a>
+            </div>
+          </form>
+        </div>
+      <?php endif?>
     </div>
   </div>
 </header>

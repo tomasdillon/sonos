@@ -14,6 +14,7 @@ a{
   text-decoration:none !important;
   margin: 0;
   padding: 0;
+  color: black;
   }
 
 ul, ol{
@@ -23,7 +24,7 @@ ul, ol{
 }
 
 .header-main{
-        background:linear-gradient(#f0f0f0, #F5F5F5 );
+  background-color: #61609C;
 
 }
 
@@ -35,7 +36,7 @@ ul, ol{
   height: auto;
   width: 100% ;
   text-align: center;
-  margin-top: 40px;
+  margin-top: 65px;
 }
 
 .subiTuFoto{
@@ -54,8 +55,8 @@ ul, ol{
   border-radius: 5px;
   padding-left: 0.5em;
   padding-right: 0.5em;
-  font-size: 0.9em;
-  margin-top: 0.5em;
+  font-size: 0.8em;
+
 }
 
 .errores2{
@@ -71,6 +72,20 @@ ul, ol{
 .centered-form .panel{
 	background: rgba(255, 255, 255, 0.8);
 	box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
+}
+
+.btn{
+  border: 1px solid #000000c2;
+}
+
+button{
+  background-color: #7170b5;
+  font-size:bold;
+  box-shadow: 1px 1px #292929;
+
+}
+button:hover{
+  background-color: #5e5e8f;
 }
 
 .boton-distinto{
@@ -106,6 +121,30 @@ header .form-control{
 
 }
 
+.row-registro{
+background-color: rgba(8, 28, 112, 0.19);
+border: 2px solid rgba(13, 8, 112, 0.33);
+border-radius: 5px;
+}
+
+
+.titulos{
+
+  /* font-family: 'Source Sans Pro', sans-serif; */
+  /* font-family: 'Itim', cursive;
+  font-family: 'Calligraffitti', cursive;
+  font-family: 'Homemade Apple', cursive; */
+  font-family: 'Caveat Brush', cursive;
+  font-size: 1.4em;
+}
+
+/* input:invalid {
+  border: 3px solid red;
+}
+
+input:valid {
+  border: 2px solid;
+} */
 
 /* bottom top */
 
@@ -118,7 +157,7 @@ header .form-control{
   font-size: 18px;
   border: none;
   outline: none;
-  background-color: red;
+  background-color: #0f134679;
   color: white;
   cursor: pointer;
   padding: 15px;
@@ -126,5 +165,5 @@ header .form-control{
 }
 
 #top-button:hover {
-  background-color: #555;
+  background-color: #61609C;
 }

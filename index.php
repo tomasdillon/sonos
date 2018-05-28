@@ -1,7 +1,7 @@
 <?php
 require_once 'soporte.php';
-require_once 'includes/nav-bar.php';
 require_once 'includes/html-doc.php';
+require_once 'includes/nav-bar.php';
 
 $name = '';
 $last_name = '';
@@ -46,55 +46,63 @@ if (isset($_POST['register'])) {
           <img src="image/logo.png" alt="logo" class="mt-5" style="width: 100%; max-width: 405px;">
           <em class="titulos d-none d-sm-block text-dark mb-5">La música nos une</em>
 
-          <div class="row justify-content-center">
-            <div class="col-8 col-md-6 col-lg-6">
+          <?php if ($auth->estaLogueado()):?>
+          <?php $usuario = $db->traerPorID($_SESSION['id']); ?>
+          <br><br>
+          <em class="titulos d-none d-sm-block text-success mb-5">Bienvenido <?=$usuario->getFirstName() . ' ' . $usuario->getLastName() ?></em>
 
-              <form class="mt-5" method="post" enctype="multipart/form-data">
+          <br><br><br><br>
+
+          <?php else:?>
+          <div class="row justify-content-center">
+            <div class="col-8 col-md-6 col-lg-6 row-registro mb-4">
+
+              <form class="mt-3" method="post" enctype="multipart/form-data">
 
                 <div class="form-inline">
 
                   <input class="form-control col-6 col-sm-5" type="text" placeholder="Nombre" name="name" value="<?= isset($_POST['name']) ? $_POST['name'] : '' ?>">
-                  <input class="form-control col-6 col-sm-5 ml-sm-auto" type="text" placeholder="Apellido" name="last_name" value="<?= isset($_POST['last_name']) ? $_POST['last_name'] : '' ?>">
+                  <input class="form-control col-6 col-sm-6 ml-sm-auto" type="text" placeholder="Apellido" name="last_name" value="<?= isset($_POST['last_name']) ? $_POST['last_name'] : '' ?>">
                 </div>
 
-                <div class="form-inline d-inline">
                   <label>
-                    <div class="mr-5 ">
+                    <div class="form-inline mr-4">
+                    <div class="d-inline ">
                       <?php if (isset($errores['name'])): ?>
                         <span class="errores"><?=$errores['name'];?></span>
                       <?php endif; ?>
                     </div>
 
-                    <div class="ml-5 " >
+                    <div class=" d-inline ml-4" >
                       <?php if (isset($errores['last_name'])): ?>
                         <span class="errores"><?=$errores['last_name'];?></span>
                       <?php endif; ?>
                     </div>
+                  </div>
                   </label>
-                </div>
-                <label></label>
 
                 <input class="form-control" type="email" placeholder="Ingresá tu e-mail" name="email" value="<?= isset($_POST['email']) ? $_POST['email'] : '' ?>">
-                <label style="color:black;">
+                <label for="email">
                   <?php if (isset($errores['email'])): ?>
                     <span class="errores"><?=$errores['email'];?></span>
                   <?php endif; ?>
                 </label>
 
                 <input class="form-control" type="password" placeholder="Creá tu contraseña" name="pass">
-                <label style="color:black;">
+                <label>
                   <?php if (isset($errores['pass'])): ?>
                     <span class="errores"><?=$errores['pass'];?></span>
                   <?php endif; ?>
                 </label>
 
                 <div class="form-group">
-                  <button class="btn btn-success my-5" type="submit" name="register">Registrarme</button>
+                  <button class="btn my-2" type="submit" name="register">Registrarme</button>
                 </div>
 
               </form>
             </div>
           </div>
+          <?php endif?>
         </div>
       </div>
     </div>
@@ -112,16 +120,17 @@ if (isset($_POST['register'])) {
         Podrás seguir a artistas y a otros usuarios. <br>
         Recibirás notificaciones por email de los shows programados y alertas cuando salen las entradas a la venta, así no te perdés de nada. <br><br>
         Lo mejor de esto, es que es 100% gratis. <br><br>
-        Que esperas! <a href="#">Registrate</a> y deciles a tus amig@s!<br><br>
+        Que esperas! <strong><a href="#">Registrate</a></strong> y deciles a tus amig@s!<br><br>
         La música nos une.
         Somos, <em>Sonos!</em>
       </p>
-      <a href="faq.php" class="btn btn-success mt-3">¿Aún tenés dudas?</a>
+
+      <button type="" class="btn my-2" name="button"><a href="faq.php" >¿Aún tenés dudas?</a></button>
     </div>
   </section>
 
   <!-- boton top -->
-  <button onclick="topFunction()" id="top-button" title="Go to top"> <span class="arrow-dropup-circle"></span> Top </button>
+  <button onclick="topFunction()" id="top-button" title="Go to top" class="fa fa-arrow-up"></button>
 
 
   <script>

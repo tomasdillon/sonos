@@ -97,9 +97,6 @@ section .section-title {
   background-color: #F5F5F5;
 }
 
-.titulos{
-  color: white; font-family: 'Montserrat', sans-serif
-}
 
 .faq-body{
   display: flex;
