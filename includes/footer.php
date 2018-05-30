@@ -28,10 +28,7 @@
 						<a target="_blank" href="http://www.facebook.com" class="iconos-redes-footer"><i class="icon ion-social-facebook"></i></a>
 						<a target="_blank" href="http://instagram.com/" class="iconos-redes-footer"><i class="icon ion-social-instagram"></i></a>
 				</div><br><br>
-				<div>
-					<p class="ir-arriba"><a href="#">SUBIR</a></p>
-
-				</div>
+		
 
 			</div>
 

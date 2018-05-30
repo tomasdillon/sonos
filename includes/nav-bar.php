@@ -133,6 +133,31 @@ if (isset($_POST['login'])){
   </div>
 </header>
 
+
+
+<!-- boton top -->
+<button onclick="topFunction()" id="top-button" title="Go to top" class="fa fa-arrow-up"></button>
+
+
+<script>
+// cuando scrolea para abajo aparece el boton
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    document.getElementById("top-button").style.display = "block";
+  } else {
+    document.getElementById("top-button").style.display = "none";
+  }
+}
+
+// cuando se hace click al boton sube para arriba 
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>
+
 <script>
 function openNav() {
   document.getElementById("mySidenav").style.width = "270px";
