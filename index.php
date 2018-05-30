@@ -49,7 +49,9 @@ if (isset($_POST['register'])) {
           <?php if ($auth->estaLogueado()):?>
           <?php $usuario = $db->traerPorID($_SESSION['id']); ?>
           <br><br>
-          <em class="titulos d-none d-sm-block text-success mb-5">Bienvenido <?=$usuario->getFirstName() . ' ' . $usuario->getLastName() ?></em>
+          <em class="titulos d-none d-sm-block text-warning mb-5">Bienvenido <?=$usuario->getFirstName() . ' ' . $usuario->getLastName() ?></em>
+
+
 
           <br><br><br><br>
 
@@ -60,26 +62,26 @@ if (isset($_POST['register'])) {
               <form class="mt-3" method="post" enctype="multipart/form-data">
 
                 <div class="form-inline">
-
                   <input class="form-control col-6 col-sm-5" type="text" placeholder="Nombre" name="name" value="<?= isset($_POST['name']) ? $_POST['name'] : '' ?>">
                   <input class="form-control col-6 col-sm-6 ml-sm-auto" type="text" placeholder="Apellido" name="last_name" value="<?= isset($_POST['last_name']) ? $_POST['last_name'] : '' ?>">
                 </div>
 
-                  <label>
-                    <div class="form-inline mr-4">
+
+                <label>
                     <div class="d-inline ">
                       <?php if (isset($errores['name'])): ?>
                         <span class="errores"><?=$errores['name'];?></span>
                       <?php endif; ?>
                     </div>
-
-                    <div class=" d-inline ml-4" >
+                </label>
+                <label>
+                    <div class=" d-inline" >
                       <?php if (isset($errores['last_name'])): ?>
                         <span class="errores"><?=$errores['last_name'];?></span>
                       <?php endif; ?>
                     </div>
-                  </div>
-                  </label>
+                </label>
+
 
                 <input class="form-control" type="email" placeholder="Ingresá tu e-mail" name="email" value="<?= isset($_POST['email']) ? $_POST['email'] : '' ?>">
                 <label for="email">

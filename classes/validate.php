@@ -62,4 +62,35 @@
        }
        return $validacion;
      }
+
+     public function cambiodePerfil(DB $db, $archivo){
+
+       $cambio = [];
+       $email = trim($_POST['email']);
+       $pass = trim($_POST['pass']);
+       $confirmacion = trim($_POST['confirmar']);
+
+       $usuario = $db->traerPorID($_SESSION['id']);
+
+
+       if (!password_verify($confirmacion, $usuario->getPassword())) {
+         $cambio['confirmar'] = "Ingrese contraseña correcta para confirmar cambios";
+       } elseif ($email !== '') {
+         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+           $cambio['email']= 'Ingrese un email válido';}
+       } elseif ($pass !== '') {
+         if (strlen($pass)<7) {
+           $cambio['pass'] = 'La clave no puede ser menor de 7 caracteres';
+           }
+       } elseif ($_FILES[$archivo]['error'] === UPLOAD_ERR_OK) {
+         $ext=strtolower(pathinfo($_FILES[$archivo]['name'], PATHINFO_EXTENSION));
+            if ($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg') {
+             $cambio['avatar'] = "Formatos admitidos: JPG, PNG o JPEG";
+           }
+       }
+
+      return $cambio;
+
+     }
+
   }

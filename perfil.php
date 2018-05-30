@@ -8,22 +8,45 @@ if ($auth->estaLogueado()){
   $usuario = $db->traerPorID($_SESSION['id']);
 }
 
- ?>
+$cambio=[];
+
+if (isset($_POST['perfil'])) {
+
+  $name = trim($_POST['name']);
+  $last_name = trim($_POST['last_name']);
+  $email = trim($_POST['email']);
+
+  $cambio = $validator->cambiodePerfil($db, 'avatar');
+
+  if (empty($cambio)){
+     $ext = pathinfo($_FILES['avatar']['name'], PATHINFO_EXTENSION);
+     $picture = 'avatarUsuarios/' . $usuario->getId() . '.' . $ext;
+
+      // $usuario = new User($_POST['name'], $_POST['last_name'], $_POST['email'], $_POST['pass']);
+      // $test01 = $db->guardarUsuario($usuario, $db);
+    
+
+  }
+
+}
+
+
+
+?>
 <body>
 
   <div class="container margin-nav">
 
     <div class="row justify-content-center">
 
-    <div class="d-block">
-        <img src="<?=$usuario->getPicture()?>" alt="avatar" class="rounded-circle" width="200" height="200">
+      <div>
+      <img src="<?=$usuario->getPicture()?>" alt="avatar" class="rounded-circle" width="200" height="200">
 
       <br><br>
 
       <strong><?=$usuario->getFirstName() . ' ' . $usuario->getLastName() ?></strong>
-
-
       </div>
+
     </div>
 
     <hr>
@@ -38,10 +61,6 @@ if ($auth->estaLogueado()){
               <div class="form-group">
                 <label class="control-label">Nombre: <?=$usuario->getFirstName()?> </label>
                 <input type="text" class="form-control" name="name" value="" placeholder="Nombre">
-                <span class="help-block" style="<?= !isset($errores['name']) ? 'display: none;' : ''; ?>">
-                  <b class="glyphicon glyphicon-exclamation-sign"></b>
-                  <?= isset($errores['name']) ? $errores['name'] : ''; ?>
-                </span>
               </div>
             </div>
 
@@ -49,10 +68,6 @@ if ($auth->estaLogueado()){
               <div class="form-group">
                 <label class="control-label">Apellido: <?=$usuario->getLastName()?></label>
                 <input type="text" class="form-control" name="last_name" value="" placeholder="Apellido">
-                <span class="help-block" style="<?= !isset($errores['last_name']) ? 'display: none;' : ''; ?>">
-                  <b class="glyphicon glyphicon-exclamation-sign"></b>
-                  <?= isset($errores['last_name']) ? $errores['last_name'] : ''; ?>
-                </span>
               </div>
             </div>
 
@@ -64,10 +79,11 @@ if ($auth->estaLogueado()){
               <div class="form-group d-inline">
                 <label class="control-label">Email: <?=$usuario->getEmail()?></label>
                 <input class="form-control" type="text" name="email" value="" placeholder="Email">
-                <span class="help-block" style="<?= !isset($errores['email']) ? 'display: none;' : ''; ?>">
-                  <b class="glyphicon glyphicon-exclamation-sign"></b>
-                  <?= isset($errores['email']) ? $errores['email'] : ''; ?>
-                </span>
+                <label>
+                  <?php if (isset($cambio['email'])): ?>
+                    <span class="errores"><?=$cambio['email'];?></span>
+                  <?php endif; ?>
+                </label>
               </div>
             </div>
 
@@ -75,10 +91,11 @@ if ($auth->estaLogueado()){
               <div class="form-group d-inline">
                 <label for="name" class="control-label">Cambiar imagen:</label>
                 <input class="form-control" type="file" name="avatar" value="<?= isset($_FILES['avatar']) ? $_FILES['avatar']['name'] : null ?>">
-                <span class="help-block" style="<?= !isset($errores['avatar']) ? 'display: none;' : '' ; ?>">
-                  <b class="glyphicon glyphicon-exclamation-sign"></b>
-                  <?= isset($errores['avatar']) ? $errores['avatar'] : '' ;?>
-                </span>
+                <label>
+                  <?php if (isset($cambio['avatar'])): ?>
+                    <span class="errores"><?=$cambio['avatar'];?></span>
+                  <?php endif; ?>
+                </label>
               </div>
             </div>
 
@@ -87,22 +104,31 @@ if ($auth->estaLogueado()){
           <div class="row justify-content-center">
             <div class="col-sm-4">
               <div class="form-group">
-                <label class="control-label">Contraseña:</label>
+                <label class="control-label">Cambiar contraseña:</label>
                 <input class="form-control" type="password" name="pass" value="">
-                <span class="help-block" style="<?= !isset($errores['pass']) ? 'display: none;' : ''; ?>">
-                  <b class="glyphicon glyphicon-exclamation-sign"></b>
-                  <?= isset($errores['pass']) ? $errores['pass'] : ''; ?>
-                </span>
+                <label>
+                  <?php if (isset($cambio['pass'])): ?>
+                    <span class="errores"><?=$cambio['pass'];?></span>
+                  <?php endif; ?>
+                </label>
               </div>
             </div>
 
-            <div class="col-sm-4 mt-4 ml-2">
+            <div class="col-sm-4">
               <div class="form-group">
-                <button class="btn" type="submit">Guardar</button>
+                <label class="control-label">Confirmar cambios:</label>
+                <input class="form-control" type="password" name="confirmar" placeholder="Contraseña">
+                <label>
+                  <?php if (isset($cambio['confirmar'])): ?>
+                    <span class="errores"><?=$cambio['confirmar'];?></span>
+                  <?php endif; ?>
+                </label>
               </div>
             </div>
+
           </div>
 
+            <button class="btn" type="submit" name="perfil">Cambiar</button>
 
         </form>
       </div>

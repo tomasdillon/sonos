@@ -64,7 +64,7 @@ if (isset($_POST['login'])){
           <div id="mySidenav" class="sidenav">
             <a href="index.php"><img src="image/logosm.png" alt="logosm"></a>
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <a class="nav-link" href="index.php">Home</a>
+            <a class="nav-link" href="bienvenido.php">Home</a>
             <a href="faq.php">Acerca de Sonos!</a>
             <a href="index.php#QuienesSomos">Quienes Somos</a>
             <a href="#">Grupos</a>
@@ -78,7 +78,7 @@ if (isset($_POST['login'])){
 
         <?php if ($auth->estaLogueado()):?>
         <?php $usuario = $db->traerPorID($_SESSION['id']); ?>
-        <div class="btn-group mb-1">
+        <div class="btn-group mb-1 mt-1">
           <button type="button" class="btn dropdown-nav mr-2" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false"style="width: 100%; height:55px;">
             <div class="d-inline col-md-6 text-left">
@@ -120,7 +120,7 @@ if (isset($_POST['login'])){
                 </div>
               </div>
               <button type="submit" class="btn btn-sm ml-1 pl-2 pr-2 hidden-xs" style="font-size: 0.6em;font-weight:bold;" name="login"> <span class="ion-log-in"></span> Ingresar </button>
-              <button type="submit" class="btn btn-sm button-small ml-2 p-0 px-2"style="font-size: 0.7em;font-weight:bold;"> <span class="ion-log-in"></span></button>
+              <button type="submit" class="btn btn-sm button-small ml-2 p-0 px-2"style="font-size: 0.7em;font-weight:bold;" name="login"> <span class="ion-log-in"></span></button>
             </div>
             <div class="form-check ajusteleft">
               <label class="form-check-label" style="font-size: 0.7em; color:black;"><input class="form-check-input" type="checkbox" name="recordar">Recordarme</label>
